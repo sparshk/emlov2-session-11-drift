@@ -7,7 +7,7 @@ defaults:
   - override /trainer: gpu.yaml
   - override /logger: tensorboard.yaml
 
-tags: ["cifar10-hyperparameter_sweep"]
+tags: ["cifar10-train"]
 
 seed : 12345
 

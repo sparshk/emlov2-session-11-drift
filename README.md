@@ -30,22 +30,31 @@ _Suggestions are always welcome!_
 
 <br>
 
-## 📌  TSAI Assignment-3 by Sparsh Kedia
+## 📌  TSAI Assignment-4 by Sparsh Kedia
 
-This is built on top of Assignment-2(in the next section).
+This is built on top of Assignment-3
 
 **Objectives**
 
-- To do hyperparameter sweep using on CIFAR10 dataset with resnet18 model(timm library) and find the best batch size, optimizer and learning rate.
-- To push the model, data and logs using DVC for experiment tracking
-- Use tensorboard as our logging framework for visualization purposes
+- To train the model using the best hyperparameters found in assignment - 3
+- To script the model using torch.jit.script for inference purposes
+- Use gradio to host a demo to perform inference on the scripted model
 
-**Steps to run:**
+**Steps to pull docker image from dockerhub and host inference demo on the scripted model directly:**
+
+- Pull image from dockerhub -
+        ``` ```
+- Run the docker image pulled - 
+        ``` ```
+- Open your browser and run the demo by visiting - 
+        ``` 0.0.0.0:8080 ```
+
+**Steps to train the model yourself, create the container and host the inference demo:**
 
 - Git clone the repository - 
-        ``` git clone https://github.com/sparshk/emlov2-session-03.git ```
+        ``` git clone https://github.com/sparshk/emlov2-session-04.git ```
 - Change working directory to the cloned repo - 
-        ``` cd emlov2-session-03 ```
+        ``` cd emlov2-session-04 ```
 - Create conda environment - 
         ``` conda create --name <env_name> ```
 - Activate conda environment - 
@@ -53,4 +62,13 @@ This is built on top of Assignment-2(in the next section).
 - Install requirements - 
         ``` pip install -r requirements.txt ```       
 - Run the hypermater sweep - 
-        ``` python src/train.py hparams_search=cifar_optuna experiment=cifar ```
+        ``` python src/train_script.py experiment=cifar ```
+- This will save your scripted model inside logs/train/runs/<run_time>/model.script.pt
+- Copy this scripted model to the demo folder - 
+        ``` cp -r logs/train/runs/<run_time>/model.script.pt demo/ ```
+- Create the docker container using - 
+        ``` make build ```
+- Run the container using - 
+        ``` make run ```
+
+This will give you run the gradio service on your local machine's port 8080. You can access the demo page by opening your browser and visiting - ``` 0.0.0.0:8080 ```

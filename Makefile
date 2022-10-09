@@ -44,3 +44,6 @@ debug: ## Enter debugging mode with pdb
 	# - docs: https://docs.python.org/3/library/pdb.html
 	#
 	python -m pdb src/train.py debug=default
+
+run: ##run the docker container
+	docker run -t -p 8080:8080 sparsh_gradio

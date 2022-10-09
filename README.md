@@ -43,11 +43,13 @@ This is built on top of Assignment-3
 **Steps to pull docker image from dockerhub and host inference demo on the scripted model directly:**
 
 - Pull image from dockerhub -
-        ``` ```
+        ``` docker pull sparshkedia/emlov2-assignment-04:gradio_app ```
 - Run the docker image pulled - 
-        ``` ```
+        ``` docker run -t -p 8080:8080 sparshkedia/emlov2-assignment-04:gradio_app ```
 - Open your browser and run the demo by visiting - 
         ``` 0.0.0.0:8080 ```
+
+Uncompressed size of the container is 1.14 GB.
 
 **Steps to train the model yourself, create the container and host the inference demo:**
 
@@ -63,7 +65,7 @@ This is built on top of Assignment-3
         ``` pip install -r requirements.txt ```       
 - Run the hypermater sweep - 
         ``` python src/train_script.py experiment=cifar ```
-- This will save your scripted model inside logs/train/runs/<run_time>/model.script.pt
+- This will save your scripted model inside - ``` logs/train/runs/<run_time>/model.script.pt ```
 - Copy this scripted model to the demo folder - 
         ``` cp -r logs/train/runs/<run_time>/model.script.pt demo/ ```
 - Create the docker container using - 

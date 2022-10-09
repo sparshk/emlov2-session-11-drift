@@ -31,7 +31,7 @@ train: ## Train the model
 	python src/train.py
 
 build:
-	docker build -t deploy demo/
+	docker build -t sparsh_gradio demo/
 
 debug: ## Enter debugging mode with pdb
 	#

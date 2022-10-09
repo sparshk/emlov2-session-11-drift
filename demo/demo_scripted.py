@@ -34,7 +34,7 @@ def demo():
         outputs=[gr.Label(num_top_classes=10)],
     )
 
-    demo.launch(server_port=8080, share=True)
+    demo.launch(server_name="0.0.0.0", server_port=8080)
 
 
 if __name__ == "__main__":

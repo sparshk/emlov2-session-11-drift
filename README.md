@@ -42,12 +42,14 @@ This is built on top of Assignment-3
 
 **Steps to pull docker image from dockerhub and host inference demo on the scripted model directly:**
 
+- Open a gitpod workspace or your local machine (must have docker installed)
 - Pull image from dockerhub -
         ``` docker pull sparshkedia/emlov2-assignment-04:gradio_app ```
 - Run the docker image pulled - 
         ``` docker run -t -p 8080:8080 sparshkedia/emlov2-assignment-04:gradio_app ```
 - Open your browser and run the demo by visiting - 
-        ``` 0.0.0.0:8080 ```
+        ``` localhost:8080 ```
+- If you're using gitpob, go to PORTS window and you'll see the gitpod forwarded web address, paste that in your browser  and you shall see the gradio demo.
 
 Uncompressed size of the container is 1.14 GB.
 

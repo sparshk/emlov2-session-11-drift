@@ -7,22 +7,26 @@
  
  ## Logs to check for Drift
  
- ![](1.jpg)
- ![](2.jpg)
- ![](3.jpg)
+ ![](1.png)
+ 
+ ![](2.png)
+ 
+ ![](3.png)
  
  ## Tensorboard Logs - Model training with Augmentations
  
- ![](4.jpg)
- ![](5.jpg)
- ![](6.jpg)
+ ![](4.png)
+ 
+ ![](5.png)
+ 
+ ![](6.png)
  
   ## Refined Model vs Original Model Prediction
   
-   ![](8.jpg)
+   ![](8.png)
    
   Drift detected and original model giving different predictions since it was not trained on augmented data.
   
-   ![](7.jpg)
+   ![](7.png)
     
   Drift detected but this time, refined model giving same predictions since it was trained on augmented data.

@@ -7,6 +7,20 @@ from torchvision.datasets import CIFAR10
 from torchvision.transforms import transforms
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+import torchvision
+
+class Cifar10SearchDataset(torchvision.datasets.CIFAR10):
+    def __init__(self, root="data/", train=True, download=True, transform=None):
+        super().__init__(root=root, train=train, download=download, transform=transform)
+
+    def __getitem__(self, index):
+        image, label = self.data[index], self.targets[index]
+
+        if self.transform is not None:
+            transformed = self.transform(image=image)
+            image = transformed["image"]
+
+        return image, label
 
 class CIFAR10DataModule(LightningDataModule):
 
@@ -52,7 +66,7 @@ class CIFAR10DataModule(LightningDataModule):
                 A.ShiftScaleRotate(shift_limit=0.05, scale_limit=0.05, rotate_limit=15, p=0.5),
                 A.RGBShift(r_shift_limit=15, g_shift_limit=15, b_shift_limit=15, p=0.5),
                 A.RandomBrightnessContrast(p=0.5),
-                A.Resize(224),
+                A.Resize(224,224),
                 A.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
                 ToTensorV2()
             ]
@@ -73,16 +87,16 @@ class CIFAR10DataModule(LightningDataModule):
 
         Do not use it to assign state (self.x = y).
         """
-        CIFAR10(self.hparams.data_dir, train=True, download=True)
-        CIFAR10(self.hparams.data_dir, train=False, download=True)
+        Cifar10SearchDataset(self.hparams.data_dir, train=True, download=True)
+        Cifar10SearchDataset(self.hparams.data_dir, train=False, download=True)
 
     def setup(self, stage=None):
 
         # load and split datasets only if not loaded already
 
         if not self.data_train and not self.data_val and not self.data_test:
-            trainset = CIFAR10(self.hparams.data_dir, train=True, transform=self.transforms)
-            testset = CIFAR10(self.hparams.data_dir, train=False, transform=self.transforms)
+            trainset = Cifar10SearchDataset(self.hparams.data_dir, train=True, transform=self.transforms)
+            testset = Cifar10SearchDataset(self.hparams.data_dir, train=False, transform=self.transforms)
             dataset = ConcatDataset(datasets=[trainset, testset])
             self.data_train, self.data_val, self.data_test = random_split(
                 dataset=dataset,

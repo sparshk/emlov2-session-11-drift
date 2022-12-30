@@ -86,12 +86,14 @@ class TIMMLitModule(LightningModule):
 
     def validation_step(self, batch: Any, batch_idx: int):
         loss, preds, targets = self.step(batch)
-
+        imgs, y = batch
         # update and log metrics
         self.val_loss(loss)
         self.val_acc(preds, targets)
         self.log("val/loss", self.val_loss, on_step=False, on_epoch=True, prog_bar=True)
         self.log("val/acc", self.val_acc, on_step=False, on_epoch=True, prog_bar=True)
+        self.log.add_image("Training Images", imgs[0:25], on_step=True, on_epoch=True, prog_bar=True, logger=True)
+
 
         return {"loss": loss, "preds": preds, "targets": targets}
 

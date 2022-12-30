@@ -1,7 +1,7 @@
 # @package _global_
 
 defaults:
-  - override /datamodule: cifar10.yaml
+  - override /datamodule: cifar10_aug.yaml
   - override /model: timm.yaml
   - override /callbacks: default.yaml
   - override /trainer: gpu.yaml
